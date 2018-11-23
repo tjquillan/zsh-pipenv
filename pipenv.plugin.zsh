@@ -1,5 +1,4 @@
 function pipenv_chpwd() {
-
     # Check if Pipfile exists in pwd or either the parent dir or the parents parent dir
     if [[ ! -e "$PWD/Pipfile" ]]; then
         if [[ ! -e "$PWD/../Pipfile" ]]; then
@@ -16,4 +15,8 @@ function pipenv_chpwd() {
     fi
 }
 
-chpwd_functions+=(pipenv_chpwd)
+# Only add this to the chpwd hooks if pipenv is installed.
+# This means that the shell will likely need to be reloaded if pipenv is installed.
+if command -v pipenv > /dev/null; then
+    chpwd_functions+=(pipenv_chpwd)
+fi
