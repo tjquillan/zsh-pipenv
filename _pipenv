@@ -1,0 +1,4 @@
+# This code was taken from the output of 'pipenv --completion'
+
+#compdef pipenv
+eval $(env COMMANDLINE="${words[1,$CURRENT]}" _PIPENV_COMPLETE=complete-zsh  pipenv)
