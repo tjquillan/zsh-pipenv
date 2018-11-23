@@ -1,4 +1,4 @@
-# pipenv-zsh
+# zsh-pipenv
 
 This plugin is designed to improve your experience using pipenv in zsh!
 
