@@ -20,12 +20,3 @@ function pipenv_chpwd() {
 if command -v pipenv > /dev/null; then
     chpwd_functions+=(pipenv_chpwd)
 fi
-
-# Completions until I can find a faster (full featured) solution
-#compdef pipenv
-_pipenv() {
-    eval $(env COMMANDLINE="${words[1,$CURRENT]}" _PIPENV_COMPLETE=complete-zsh  pipenv)
-}
-if [[ "$(basename -- ${(%):-%x})" != "_pipenv" ]]; then
-  compdef _pipenv pipenv
-fi
