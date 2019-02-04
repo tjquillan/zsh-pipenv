@@ -1,16 +1,26 @@
 function pipenv_chpwd() {
+    SHOULD_CD=false
+
     # Check if Pipfile exists in pwd or either the parent dir or the parents parent dir
     if [[ ! -e "$PWD/Pipfile" ]]; then
         if [[ ! -e "$PWD/../Pipfile" ]]; then
             if [[ ! -e "$PWD/../../Pipfile" ]]; then
                 return
+            else
+                SHOULD_CD=true
             fi
+        else
+            SHOULD_CD=true
         fi
     fi
-    
+
     if [[ ! "$PIPENV_ACTIVE" ]]; then
         if pipenv --venv >/dev/null 2>&1; then
-            pipenv shell
+            if [[ $SHOULD_CD == true ]]; then
+                pipenv shell "cd $PWD"
+            else
+                pipenv shell
+            fi
         fi
     fi
 }
